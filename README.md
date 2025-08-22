@@ -46,10 +46,6 @@ bash cc_deepseek.sh
 或者直接远程安装 GitHub 仓库的脚本：
 
 ```bash
-# 方法一：直接运行远程脚本
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/KMnO4-zx/cc-mirror/master/cc_deepseek.sh)"
-
-# 方法二：先下载再运行
 curl -O https://raw.githubusercontent.com/KMnO4-zx/cc-mirror/master/cc_deepseek.sh
 chmod +x cc_deepseek.sh
 ./cc_deepseek.sh
