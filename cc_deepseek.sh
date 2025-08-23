@@ -236,7 +236,8 @@ if [ -f "$rc_file" ]; then
     grep -v -e "# Claude Code environment variables" \
             -e "export ANTHROPIC_BASE_URL" \
             -e "export ANTHROPIC_API_KEY" \
-            -e "export ANTHROPIC_MODEL" "$rc_file" > "$temp_file"
+            -e "export ANTHROPIC_MODEL" \
+            -e "export ANTHROPIC_SMALL_FAST_MODEL" "$rc_file" > "$temp_file"
     mv "$temp_file" "$rc_file"
 fi
 
@@ -245,6 +246,7 @@ echo "# Claude Code environment variables" >> "$rc_file"
 echo "export ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic" >> "$rc_file"
 echo "export ANTHROPIC_API_KEY=$api_key" >> "$rc_file"
 echo "export ANTHROPIC_MODEL=$selected_model" >> "$rc_file"
+echo "export ANTHROPIC_SMALL_FAST_MODEL=$selected_model" >> "$rc_file"
 echo "✅ Environment variables successfully updated in $rc_file"
 
 echo ""
