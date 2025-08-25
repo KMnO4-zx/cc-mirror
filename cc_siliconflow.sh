@@ -201,8 +201,8 @@ echo "🤖 Please select a model to use｜请选择需要使用的模型:"
 model_options=(
     "moonshotai/Kimi-K2-Instruct"
     "Qwen/Qwen3-Coder-480B-A35B-Instruct"
-    "Qwen/Qwen3-235B-A22B-Instruct-2507"
     "zai-org/GLM-4.5"
+    "deepseek-ai/DeepSeek-V3.1"
     "Custom (enter your own model)｜自定义 (手动输入模型)"
 )
 current_selection=0
