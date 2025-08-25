@@ -340,9 +340,214 @@ mktemp  # 安全临时文件
 
 这个脚本展示了生产环境中Shell脚本的最佳实践，包括错误处理、用户交互、跨平台兼容性和代码组织。
 
+## 13. Shell基础命令详解
+
+### 13.1 set命令详解
+```bash
+set -e    # 任何命令失败立即退出脚本
+set +e    # 关闭-e选项，即使命令失败也继续执行
+set -x    # 调试模式，显示执行的每条命令
+set +x    # 关闭调试模式
+set -u    # 使用未定义变量时报错
+set -o pipefail  # 管道命令中任何一步失败都认为整个管道失败
+```
+
+### 13.2 echo命令详解
+```bash
+echo "Hello World"          # 输出文字
+echo -n "No newline"        # 输出不换行
+echo -e "Line 1\nLine 2"    # 解析转义字符
+```
+
+### 13.3 重定向操作符详解
+```bash
+# 输出重定向
+> file      # 覆盖写入文件
+>> file     # 追加到文件末尾
+
+# 输入重定向
+< file      # 从文件读取输入
+
+# 错误重定向
+2> file     # 将错误信息写入文件
+2>&1        # 将错误重定向到标准输出
+&> file     # 同时重定向输出和错误
+
+# 管道
+command1 | command2    # 将command1的输出作为command2的输入
+```
+
+### 13.4 文件和目录操作
+```bash
+# 文件操作
+ls          # 列出文件和目录
+ls -la      # 详细列表，包括隐藏文件
+ls -lh      # 人类可读的文件大小
+
+cat file    # 查看文件内容
+cat file1 file2    # 合并多个文件
+
+touch file  # 创建空文件或更新时间戳
+
+rm file     # 删除文件
+rm -r dir   # 递归删除目录
+rm -f file  # 强制删除，不提示确认
+
+# 目录操作
+mkdir dir   # 创建目录
+mkdir -p path/to/dir    # 创建多级目录
+
+cp source dest          # 复制文件
+cp -r source_dir dest_dir    # 复制目录
+
+mv oldname newname      # 重命名或移动文件/目录
+
+# 查看当前位置
+pwd         # 显示当前工作目录
+cd dir      # 切换目录
+cd ..       # 返回上级目录
+cd ~        # 返回用户主目录
+```
+
+### 13.5 权限相关命令
+```bash
+chmod +x script.sh      # 添加执行权限
+chmod 755 file          # 设置权限为rwxr-xr-x
+chmod 644 file          # 设置权限为rw-r--r--
+
+chown user:group file   # 修改文件所有者和组
+chown -R user:group dir # 递归修改目录权限
+```
+
+### 13.6 进程管理
+```bash
+ps aux              # 查看所有进程
+grep pattern        # 搜索文本
+ps aux | grep nginx # 查找特定进程
+
+kill PID            # 结束进程（发送TERM信号）
+kill -9 PID         # 强制结束进程（发送KILL信号）
+killall process_name    # 按名称结束所有进程
+
+jobs                # 查看后台任务
+fg %1               # 将后台任务调到前台
+bg %1               # 将暂停的任务放到后台运行
+```
+
+### 13.7 环境变量
+```bash
+# 查看环境变量
+env                 # 显示所有环境变量
+printenv PATH       # 显示特定环境变量
+echo $HOME          # 显示HOME变量的值
+
+# 设置环境变量
+export VAR="value"  # 设置环境变量（子进程可见）
+VAR="value"         # 设置变量（仅当前shell可见）
+
+# 常用环境变量
+$HOME               # 用户主目录
+$USER               # 当前用户名
+$PATH               # 命令搜索路径
+$PWD                # 当前工作目录
+```
+
+### 13.8 条件测试
+```bash
+# 文件测试
+[ -f file ]         # 文件存在且是普通文件
+[ -d dir ]          # 目录存在
+[ -e path ]         # 文件或目录存在
+[ -r file ]         # 文件可读
+[ -w file ]         # 文件可写
+[ -x file ]         # 文件可执行
+
+# 字符串测试
+[ "$str1" = "$str2" ]   # 字符串相等
+[ "$str1" != "$str2" ]  # 字符串不相等
+[ -z "$str" ]           # 字符串为空
+[ -n "$str" ]           # 字符串非空
+
+# 数值比较
+[ $num1 -eq $num2 ]     # 等于
+[ $num1 -ne $num2 ]     # 不等于
+[ $num1 -lt $num2 ]     # 小于
+[ $num1 -le $num2 ]     # 小于等于
+[ $num1 -gt $num2 ]     # 大于
+[ $num1 -ge $num2 ]     # 大于等于
+```
+
+### 13.9 特殊变量
+```bash
+$0      # 脚本名称
+$1, $2, $3...  # 脚本参数
+$#      # 参数个数
+$*      # 所有参数
+$@      # 所有参数（更安全的版本）
+$?      # 上一个命令的退出状态
+$$      # 当前进程的PID
+$!      # 最后一个后台进程的PID
+```
+
+### 13.10 通配符和模式匹配
+```bash
+*       # 匹配任意数量的字符
+?       # 匹配单个字符
+[abc]   # 匹配a、b或c中的任意一个
+[a-z]   # 匹配a到z之间的任意字符
+{*.txt,*.md}  # 匹配.txt或.md文件
+```
+
+### 13.11 引号使用规则
+```bash
+echo Hello World          # 输出：Hello World
+echo "Hello World"        # 输出：Hello World（保留空格）
+echo 'Hello World'        # 输出：Hello World（不解析变量）
+
+echo "$HOME"              # 输出变量值：/home/user
+echo '$HOME'              # 输出：$HOME（不解析变量）
+echo "$HOME""s"          # 输出：/home/users
+```
+
+### 13.12 调试技巧
+```bash
+set -x      # 开启调试模式，显示每条执行的命令
+set +x      # 关闭调试模式
+
+bash -x script.sh           # 以调试模式运行脚本
+bash -n script.sh           # 检查语法错误，不执行
+
+# 在脚本中添加调试信息
+echo "Debug: \$var = $var"  # 打印变量值
+```
+
+### 13.13 命令替换
+```bash
+# 反引号方式（旧式）
+result=`command`
+
+# $()方式（推荐）
+result=$(command)
+result=$(ls -la)
+result=$(pwd)
+```
+
+### 13.14 算术运算
+```bash
+# 使用$(( ))进行算术运算
+result=$((5 + 3))           # 加法
+result=$((5 - 3))           # 减法
+result=$((5 * 3))           # 乘法
+result=$((10 / 3))          # 除法
+result=$((10 % 3))          # 取余
+result=$((i++))             # 自增
+result=$((i--))             # 自减
+```
+
 ## 下一步学习建议
 
 1. **实践**: 尝试修改脚本添加新功能
 2. **阅读**: 查看其他开源项目的Shell脚本
 3. **工具**: 学习 `sed`, `awk`, `grep` 等文本处理工具
 4. **调试**: 使用 `set -x` 调试脚本执行过程
+5. **进阶**: 学习正则表达式、高级文本处理技巧
