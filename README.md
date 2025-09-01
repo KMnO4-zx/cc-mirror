@@ -31,6 +31,11 @@ Claude Code 是 Anthropic 推出的 AI Agents 工具，功能强大但价格昂�
 - kimi-k2-0711-preview
 - kimi-k2-turbo-preview
 
+### [BigModel](https://www.bigmodel.cn/invite?icode=H5Bvgzt8%2Bz7f%2F%2FrDkWTqagdiAOSjB9JFC%2FJ7Mme2e0c%3D)
+
+- GLM-4.5
+- GLM-4.5-Air
+
 ## 🚀 快速开始
 
 以 DeepSeek 为例，其他平台操作类似。首先需要在相应的模型服务平台注册账号，并获取 API Key。然后运行相应的脚本即可完成配置。
