@@ -17,9 +17,8 @@ Claude Code 是 Anthropic 推出的 AI Agents 工具，功能强大但价格昂�
 
 - moonshotai/Kimi-K2-Instruct
 - Qwen/Qwen3-Coder-480B-A35B-Instruct
-- Qwen/Qwen3-235B-A22B-Instruct-2507
 - zai-org/GLM-4.5
-- Pro/deepseek-ai/DeepSeek-V3
+- deepseek-ai/DeepSeek-V3.1
 
 ### [DeepSeek](https://platform.deepseek.com/usage)
 
