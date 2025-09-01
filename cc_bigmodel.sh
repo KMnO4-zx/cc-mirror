@@ -199,8 +199,8 @@ echo ""
 echo "🤖 Please select a model to use｜请选择需要使用的模型:"
 
 model_options=(
-    "GLM-4.5"
-    "GLM-4.5-Air"
+    "glm-4.5"
+    "glm-4.5-air"
     "Custom (enter your own model)｜自定义 (手动输入模型)"
 )
 current_selection=0
