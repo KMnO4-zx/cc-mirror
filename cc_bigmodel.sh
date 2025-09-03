@@ -182,7 +182,7 @@ fi
 if [ -z "$api_key" ]; then
     echo ""
     echo "🔑 Please enter your BigModel API Key｜设置你的 BigModel API Key:"
-    echo "   You can get your API Key from｜可访问右边地址获取 API Key: https://open.bigmodel.cn/usercenter/proj-mgmt/apikeys"
+    echo "   You can get your API Key from｜可访问右边地址获取 API Key: https://zhipuaishengchan.datasink.sensorsdata.cn/t/Ew"
     echo "   Note: The input is hidden for security. Please paste your API Key directly.｜注意：输入的内容不会显示在屏幕上，请直接输入"
     echo ""
     read -s api_key
