@@ -29,6 +29,7 @@ Claude Code 是 Anthropic 推出的 AI Agents 工具，功能强大但价格昂�
 
 - kimi-k2-0711-preview
 - kimi-k2-turbo-preview
+- kimi-k2-0905-preview
 
 ### [BigModel](https://zhipuaishengchan.datasink.sensorsdata.cn/t/Ew)
 
