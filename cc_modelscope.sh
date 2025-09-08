@@ -201,7 +201,6 @@ echo ""
 echo "🤖 Please select a model to use｜请选择需要使用的模型:"
 
 model_options=(
-    "moonshotai/Kimi-K2-Instruct-0905"
     "Qwen/Qwen3-Coder-480B-A35B-Instruct"
     "ZhipuAI/GLM-4.5"
     "deepseek-ai/DeepSeek-V3.1"
