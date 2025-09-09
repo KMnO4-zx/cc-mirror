@@ -29,12 +29,17 @@ Claude Code 是 Anthropic 推出的 AI Agents 工具，功能强大但价格昂�
 
 - kimi-k2-0711-preview
 - kimi-k2-turbo-preview
-- kimi-k2-0905-preview
 
-### [BigModel](https://zhipuaishengchan.datasink.sensorsdata.cn/t/Ew)
+### [BigModel](https://www.bigmodel.cn/invite?icode=H5Bvgzt8%2Bz7f%2F%2FrDkWTqagdiAOSjB9JFC%2FJ7Mme2e0c%3D)
 
 - GLM-4.5
 - GLM-4.5-Air
+
+### [ModelScope](https://www.modelscope.cn/)
+
+- Qwen/Qwen3-Coder-480B-A35B-Instruct
+- ZhipuAI/GLM-4.5
+- deepseek-ai/DeepSeek-V3.1
 
 ## 🚀 快速开始
 
@@ -81,6 +86,16 @@ chmod +x cc_deepseek.sh
 ![alt text](./images/image-4.png)
 
 > 💡 **注意**：目前 Claude Code 不支持同时配置多个自定义模型。如需切换模型，请重新执行上述 1-5 步，选择并更新 `ANTHROPIC_MODEL` 环境变量。
+
+## 特别感谢
+
+<div align=center style="margin-top: 30px;">
+  <p>感谢所有为本项目做出贡献的开发者们 ❤️</p>
+  <a href="https://github.com/KMnO4-zx/cc-mirror/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=KMnO4-zx/cc-mirror" />
+  </a>
+</div>
+
 
 ## 📚 参考
 
