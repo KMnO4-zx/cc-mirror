@@ -32,6 +32,7 @@ Claude Code 是 Anthropic 推出的 AI Agents 工具，功能强大但价格昂�
 
 ### [BigModel](https://www.bigmodel.cn/invite?icode=H5Bvgzt8%2Bz7f%2F%2FrDkWTqagdiAOSjB9JFC%2FJ7Mme2e0c%3D)
 
+- GLM-4.6
 - GLM-4.5
 - GLM-4.5-Air
 
