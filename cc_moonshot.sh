@@ -203,6 +203,7 @@ model_options=(
     "kimi-k2-turbo-preview"
     "kimi-k2-0905-preview"
     "kimi-k2-thinking"
+    "kimi-k2-thinking-turbo"
     "Custom (enter your own model)｜自定义 (手动输入模型)"
 )
 current_selection=0
