@@ -173,7 +173,7 @@ case "$current_shell" in
 esac
 
 api_key=""
-if [ -f "$rc_file" ] && grep -E -q 'export[[:space:]]+ANTHROPIC_BASE_URL=["'\'']?https://api\.moonshot\.cn/anthropic/?["'\'']?' "$rc_file"; then
+if [ -f "$rc_file" ] && grep -E -q 'export[[:space:]]+ANTHROPIC_BASE_URL=["'\'']?https://api\.kimi\.com/coding/?["'\'']?' "$rc_file"; then
     echo ""
     echo "✅ Detected existing configuration. Using saved API Key.｜检测到已有配置，将使用已保存的 API Key。"
     api_key=$(grep -E 'export[[:space:]]+ANTHROPIC_API_KEY=' "$rc_file" | head -n1 | cut -d'=' -f2- | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' -e 's/^"//' -e 's/"$//' -e "s/^'//" -e "s/'$//")
@@ -199,11 +199,7 @@ echo ""
 echo "🤖 Please select a model to use｜请选择需要使用的模型:"
 
 model_options=(
-    "kimi-k2-0711-preview"
-    "kimi-k2-turbo-preview"
-    "kimi-k2-0905-preview"
-    "kimi-k2-thinking"
-    "kimi-k2-thinking-turbo"
+    "kimi-for-coding"
     "Custom (enter your own model)｜自定义 (手动输入模型)"
 )
 current_selection=0
@@ -246,7 +242,7 @@ fi
 
 echo "" >> "$rc_file"
 echo "# Claude Code environment variables" >> "$rc_file"
-echo "export ANTHROPIC_BASE_URL=https://api.moonshot.cn/anthropic" >> "$rc_file"
+echo "export ANTHROPIC_BASE_URL=https://api.kimi.com/coding" >> "$rc_file"
 echo "export ANTHROPIC_API_KEY=$api_key" >> "$rc_file"
 echo "export ANTHROPIC_MODEL=$selected_model" >> "$rc_file"
 echo "export ANTHROPIC_SMALL_FAST_MODEL=$selected_model" >> "$rc_file"
