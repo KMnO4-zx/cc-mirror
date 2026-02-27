@@ -138,9 +138,15 @@ fi
 # 集中处理安装/更新逻辑
 if [ "$NEEDS_INSTALL" = true ]; then
     echo "🔄 Preparing environment by cleaning up previous versions (if any)...｜正在清理旧版本以准备环境..."
-    # 关键修复：在安装前，先尝试卸载以清理任何残留文件。忽略可能出现的错误。
+    # 先尝试正常卸载
     npm uninstall -g @anthropic-ai/claude-code > /dev/null 2>&1 || true
-    
+    # 清理 npm 可能残留的目录（包括失败安装留下的临时目录）
+    npm_global_dir="$(npm prefix -g)/lib/node_modules/@anthropic-ai"
+    if [ -d "$npm_global_dir" ]; then
+        echo "🧹 Cleaning up residual files...｜正在清理残留文件..."
+        rm -rf "$npm_global_dir"
+    fi
+
     echo "📦 Installing/Updating @anthropic-ai/claude-code..."
     npm install -g @anthropic-ai/claude-code
     echo "✅ Claude Code installed/updated successfully.｜Claude Code 安装/更新成功。"
