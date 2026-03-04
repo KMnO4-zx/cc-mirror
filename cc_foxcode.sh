@@ -5,8 +5,9 @@ set -e
 
 # --- 交互式菜单函数 (兼容旧版 Bash 且相对定位) ---
 show_menu() {
-    local options_count=${#model_options[@]}
-    
+    local -n options=$1
+    local options_count=${#options[@]}
+
     # 为菜单和提示语预留空间
     for ((i=0; i<options_count+1; i++)); do echo ""; done
     tput cuu $((options_count + 1))
@@ -19,13 +20,13 @@ show_menu() {
     while true; do
         # 重置光标到菜单起点
         tput cuu $((options_count + 1))
-        
-        for i in "${!model_options[@]}"; do
+
+        for i in "${!options[@]}"; do
             tput el
             if [ "$i" -eq "$current_selection" ]; then
-                echo "  > ${model_options[i]}"
+                echo "  > ${options[i]}"
             else
-                echo "    ${model_options[i]}"
+                echo "    ${options[i]}"
             fi
         done
 
@@ -179,7 +180,7 @@ case "$current_shell" in
 esac
 
 api_key=""
-if [ -f "$rc_file" ] && grep -E -q 'export[[:space:]]+ANTHROPIC_BASE_URL=["'\'']?https://code\.newcli\.com/claude/droid/?["'\'']?' "$rc_file"; then
+if [ -f "$rc_file" ] && grep -E -q 'export[[:space:]]+ANTHROPIC_BASE_URL=["'\'']?https://code\.newcli\.com/claude' "$rc_file"; then
     echo ""
     echo "✅ Detected existing configuration. Using saved API Key.｜检测到已有配置，将使用已保存的 API Key。"
     api_key=$(grep -E 'export[[:space:]]+ANTHROPIC_API_KEY=' "$rc_file" | head -n1 | cut -d'=' -f2- | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' -e 's/^"//' -e 's/"$//' -e "s/^'//" -e "s/'$//")
@@ -200,6 +201,30 @@ if [ -z "$api_key" ]; then
     fi
 fi
 
+# --- Base URL 选择 ---
+echo ""
+echo "🌐 Please select a base URL｜请选择 Base URL:"
+
+base_url_options=(
+    "claude-cc (https://code.newcli.com/claude)"
+    "super-cc (https://code.newcli.com/claude/super)"
+    "ultra-cc (https://code.newcli.com/claude/ultra)"
+    "aws-cc (https://code.newcli.com/claude/droid)"
+)
+current_selection=0
+
+show_menu base_url_options
+
+case "$current_selection" in
+    0) selected_base_url="https://code.newcli.com/claude" ;;
+    1) selected_base_url="https://code.newcli.com/claude/super" ;;
+    2) selected_base_url="https://code.newcli.com/claude/ultra" ;;
+    3) selected_base_url="https://code.newcli.com/claude/droid" ;;
+esac
+
+echo ""
+echo "✅ You have selected｜已选择 Base URL: $selected_base_url"
+
 # --- 模型选择 ---
 echo ""
 echo "🤖 Please select a model to use｜请选择需要使用的模型:"
@@ -213,7 +238,7 @@ model_options=(
 )
 current_selection=0
 
-show_menu
+show_menu model_options
 
 custom_option_index=$((${#model_options[@]} - 1))
 
@@ -251,7 +276,7 @@ fi
 
 echo "" >> "$rc_file"
 echo "# Claude Code environment variables" >> "$rc_file"
-echo "export ANTHROPIC_BASE_URL=https://code.newcli.com/claude/droid" >> "$rc_file"
+echo "export ANTHROPIC_BASE_URL=$selected_base_url" >> "$rc_file"
 echo "export ANTHROPIC_API_KEY=$api_key" >> "$rc_file"
 echo "export ANTHROPIC_MODEL=$selected_model" >> "$rc_file"
 echo "export ANTHROPIC_SMALL_FAST_MODEL=$selected_model" >> "$rc_file"
