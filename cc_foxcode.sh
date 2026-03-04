@@ -5,8 +5,8 @@ set -e
 
 # --- 交互式菜单函数 (兼容旧版 Bash 且相对定位) ---
 show_menu() {
-    local -n options=$1
-    local options_count=${#options[@]}
+    local array_name=$1
+    eval "local options_count=\${#${array_name}[@]}"
 
     # 为菜单和提示语预留空间
     for ((i=0; i<options_count+1; i++)); do echo ""; done
@@ -21,12 +21,13 @@ show_menu() {
         # 重置光标到菜单起点
         tput cuu $((options_count + 1))
 
-        for i in "${!options[@]}"; do
+        for i in $(seq 0 $((options_count - 1))); do
             tput el
+            eval "local option=\${${array_name}[i]}"
             if [ "$i" -eq "$current_selection" ]; then
-                echo "  > ${options[i]}"
+                echo "  > $option"
             else
-                echo "    ${options[i]}"
+                echo "    $option"
             fi
         done
 
